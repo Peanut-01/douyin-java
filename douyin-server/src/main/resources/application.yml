@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${douyin.datasource.driver-class-name}
+      url: jdbc:mysql://${douyin.datasource.host}:${douyin.datasource.port}/${douyin.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${douyin.datasource.username}
+      password: ${douyin.datasource.password}
+  servlet:
+    multipart:
+      max-request-size: 3GB
+      max-file-size: 1GB
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.douyin.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      douyin:
+        mapper: debug
+        service: info
+        controller: info
+
+douyin:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    secret-key: douyin-java
+    # 设置jwt过期时间
+    ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    token-name: token

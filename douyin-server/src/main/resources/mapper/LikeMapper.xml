@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.douyin.mapper.LikeMapper">
+    <select id="select" resultType="com.douyin.entity.Like">
+        select * from likes
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="videoId != null">
+                and video_id = #{videoId}
+            </if>
+            <if test="isFavorite != null">
+                and is_favorite = #{isFavorite}
+            </if>
+        </where>
+    </select>
+</mapper>

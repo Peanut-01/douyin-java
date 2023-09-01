@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.douyin.mapper.FollowMapper">
+    <select id="select" resultType="com.douyin.entity.Follow">
+        select * from follows
+        <where>
+            <if test="userId != null"> and user_id = #{userId} </if>
+            <if test="followedId != null"> and followed_id = #{followedId} </if>
+            <if test="isFriend != null"> and is_friend = #{isFriend} </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,13 @@
+douyin:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: douyin_java
+    username: username
+    password: password
+  alioss:
+    endpoint: *
+    access-key-secret: *
+    access-key-id: *
+    bucket-name: *
