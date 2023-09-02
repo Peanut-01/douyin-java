@@ -1,0 +1,83 @@
+create table comments
+(
+    comment_id  bigint auto_increment comment '评论id'
+        primary key,
+    video_id    bigint       not null comment '视频id',
+    user_id     bigint       not null comment '用户id',
+    content     varchar(100) not null comment '评论内容',
+    create_time datetime     not null comment '创建时间'
+);
+
+create index user_id
+    on comments (user_id);
+
+create index video_id
+    on comments (video_id);
+
+create table follows
+(
+    user_id     bigint     not null comment '用户id',
+    followed_id bigint     not null comment '该用户关注的用户id',
+    is_friend   varchar(1) not null comment '是否为好友，1-是好友。2-不是好友',
+    primary key (user_id, followed_id)
+);
+
+create table likes
+(
+    user_id     bigint     not null comment '用户id',
+    video_id    bigint     not null comment '视频id',
+    is_favorite tinyint(1) not null comment '是否点赞',
+    primary key (user_id, video_id)
+);
+
+create table messages
+(
+    message_id   bigint auto_increment
+        primary key,
+    from_user_id bigint       not null comment '发送消息的用户id',
+    to_user_id   bigint       not null comment '接收消息的用户id',
+    content      varchar(255) not null comment '发送的消息',
+    create_time  datetime     not null comment '创建时间'
+);
+
+create index from_user_id
+    on messages (from_user_id);
+
+create index to_user_id
+    on messages (to_user_id);
+
+create table replies
+(
+    reply_id    bigint auto_increment comment '回复id'
+        primary key,
+    comment_id  bigint                      not null comment '评论id',
+    user_id     bigint                      not null comment '用户id',
+    content     varchar(100) charset latin1 not null comment '回复内容',
+    create_time datetime                    not null comment '创建时间'
+);
+
+create index comment_id
+    on replies (comment_id);
+
+create index user_id
+    on replies (user_id);
+
+create table users
+(
+    user_id  bigint auto_increment comment '用户id'
+        primary key,
+    username varchar(255) not null,
+    password varchar(255) not null
+);
+
+create table videos
+(
+    video_id    bigint auto_increment comment '视频id'
+        primary key,
+    title       varchar(255) not null comment '视频标题',
+    author_id   bigint       not null comment '作者',
+    play_url    varchar(255) not null comment '播放URL',
+    cover_url   varchar(255) not null comment '封面URL',
+    create_time datetime     not null comment '创建时间'
+);
+
